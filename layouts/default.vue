@@ -1,13 +1,9 @@
 <template>
-  <v-app>
-    <v-app-bar :elevation="0" rounded>
-      <template v-slot:prepend>
-        <Logotype />
-      </template>
-    </v-app-bar>
+  <v-app class="default-layout">
+    <Header />
 
-    <main>
+    <v-main>
       <slot />
-    </main>
+    </v-main>
   </v-app>
 </template>
