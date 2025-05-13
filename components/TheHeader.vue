@@ -3,8 +3,8 @@
     <v-container>
       <v-row align="center" justify="space-between">
         <v-col cols="auto" class="d-flex align-center ga-5">
-          <Logotype />
-          
+          <TheLogotype />
+
           <HeaderMenu />
         </v-col>
 

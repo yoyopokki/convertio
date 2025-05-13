@@ -1,6 +1,6 @@
 <template>
   <v-app class="default-layout">
-    <Header />
+    <TheHeader />
 
     <v-main>
       <slot />

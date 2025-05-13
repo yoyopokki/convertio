@@ -1,0 +1,16 @@
+{
+  "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+  "editor.formatOnSave": true,
+  "eslint.format.enable": true,
+  "eslint.run": "onType",
+  "eslint.workingDirectories": [
+    "./"
+  ],
+  "prettier.requireConfig": true,
+  "prettier.resolveGlobalModules": true,
+  "telemetry.feedback.enabled": false,
+  "vue.autoInsert.dotValue": true,
+  "prettier.documentSelectors": [
+    "**/*.{ts,js,vue,html,css,scss,json}"
+  ]
+}
