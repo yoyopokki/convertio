@@ -2,7 +2,7 @@
   <div
     ref="drag-file-upload"
     class="drag-file-upload border-md border-dashed rounded pa-16 d-flex flex-column align-center justify-center"
-    :class="{ 'drag-file-upload_active': dragActive }"
+    :class="{ 'drag-file-upload_active': isOverDropZone }"
   >
     <div class="drag-file-upload__title">Переместите сюда файл</div>
 
@@ -15,26 +15,33 @@
 </template>
 
 <script setup lang="ts">
+import { useDropZone } from "@vueuse/core";
+import { DataTypes } from "~/types/data-types";
+
+const dataTypes: Record<DataTypes, string[]> = {
+  [DataTypes.IMAGE]: ["image/jpeg", "image/png"],
+  [DataTypes.MUSIC]: [],
+};
+
+const props = withDefaults(
+  defineProps<{
+    for?: DataTypes;
+  }>(),
+  { for: DataTypes.IMAGE },
+);
+const emit = defineEmits<{
+  upload: [files: File[]];
+}>();
+
 const dragFileUploadElement = useTemplateRef("drag-file-upload");
 
-const dragActive = ref(false);
+const onDrop = (files: File[] | null) => {
+  emit("upload", files ?? []);
+};
 
-onMounted(() => {
-  dragFileUploadElement.value?.addEventListener("dragenter", (event) => {
-    event.preventDefault();
-
-    dragActive.value = true;
-  });
-
-  dragFileUploadElement.value?.addEventListener("dragleave", (event) => {
-    event.preventDefault();
-
-    dragActive.value = false;
-  });
-
-  dragFileUploadElement.value?.addEventListener("drop", (event) => {
-    event.preventDefault();
-  });
+const { isOverDropZone } = useDropZone(dragFileUploadElement, {
+  onDrop,
+  dataTypes: dataTypes[props.for],
 });
 </script>
 
